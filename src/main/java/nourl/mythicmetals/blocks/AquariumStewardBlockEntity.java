@@ -14,17 +14,18 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import nourl.mythicmetals.MythicMetals;
+import nourl.mythicmetals.registry.RegisterBlockEntityTypes;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.UUID;
 
-public class AquariumSentryBlockEntity extends BlockEntity {
+public class AquariumStewardBlockEntity extends BlockEntity implements ConduitPowered {
     /**
-     * The range of the Aquarium Sentry
+     * The range of the Aquarium Steward's attack
      */
     private static final int MAX_RANGE = 16;
+    private static final float DAMAGE = 5.0f;
     private boolean activated = false;
     private int activeTime = 50;
     @Nullable
@@ -32,12 +33,12 @@ public class AquariumSentryBlockEntity extends BlockEntity {
     @Nullable
     private UUID targetUuid;
 
-    public AquariumSentryBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    public AquariumStewardBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 
-    public AquariumSentryBlockEntity(BlockPos pos, BlockState state) {
-        super(MythicMetals.AQUARIUM_SENTRY_BLOCK_ENTITY_TYPE, pos, state);
+    public AquariumStewardBlockEntity(BlockPos pos, BlockState state) {
+        super(RegisterBlockEntityTypes.AQUARIUM_STEWARD_BLOCK_ENTITY_TYPE, pos, state);
     }
 
 
@@ -61,7 +62,7 @@ public class AquariumSentryBlockEntity extends BlockEntity {
 
     }
 
-    public static void tick(World world, BlockPos pos, BlockState state, AquariumSentryBlockEntity blockEntity) {
+    public static void tick(World world, BlockPos pos, BlockState state, AquariumStewardBlockEntity blockEntity) {
         if (!world.isClient() && world.getTime() % 40L == 0 && blockEntity.activated) {
             attackHostileEntity(world, pos, state, blockEntity);
         }
@@ -84,13 +85,8 @@ public class AquariumSentryBlockEntity extends BlockEntity {
         return list.size() == 1 ? list.get(0) : null;
     }
 
-    public void activateSentry() {
-        activated = true;
-        activeTime = 50;
-    }
-
     // [VanillaCopy] Conduit Block Entity's attack method
-    private static void attackHostileEntity(World world, BlockPos pos, BlockState state, AquariumSentryBlockEntity blockEntity) {
+    private static void attackHostileEntity(World world, BlockPos pos, BlockState state, AquariumStewardBlockEntity blockEntity) {
         LivingEntity livingEntity = blockEntity.targetEntity;
         if (!blockEntity.activated) {
             blockEntity.targetEntity = null;
@@ -119,12 +115,18 @@ public class AquariumSentryBlockEntity extends BlockEntity {
                     1.0F,
                     1.0F
             );
-            blockEntity.targetEntity.damage(DamageSource.MAGIC, 5.0F);
+            blockEntity.targetEntity.damage(DamageSource.MAGIC, DAMAGE);
         }
 
         if (livingEntity != blockEntity.targetEntity) {
             world.updateListeners(pos, state, state, Block.NOTIFY_LISTENERS);
         }
 
+    }
+
+    @Override
+    public void mythicmetals$activateSentry() {
+        activated = true;
+        activeTime = 50;
     }
 }

@@ -29,7 +29,8 @@ public class MythicBlocks {
             .createAnvil(IRON_MINING_LEVEL)
             .finish();
 
-    public static final AquariumSentryBlock AQUARIUM_SENTRY = new AquariumSentryBlock(FabricBlockSettings.copyOf(Blocks.CONDUIT));
+    public static final AquariumResonatorBlock AQUARIUM_RESONATOR = new AquariumResonatorBlock(FabricBlockSettings.copyOf(Blocks.CONDUIT));
+    public static final AquariumStewardBlock AQUARIUM_STEWARD = new AquariumStewardBlock(FabricBlockSettings.copyOf(Blocks.CONDUIT));
 
     public static final BlockSet BANGLUM = BlockSet.Builder.begin("banglum", false)
             .strength(5.0F, 5.5F)
@@ -195,7 +196,8 @@ public class MythicBlocks {
 
     public static void init() {
         BlockSet.Builder.register();
-        RegistryHelper.block("aquarium_sentry", AQUARIUM_SENTRY);
+        RegistryHelper.block("aquarium_steward", AQUARIUM_STEWARD);
+        RegistryHelper.block("aquarium_resonator", AQUARIUM_RESONATOR);
         RegistryHelper.block("banglum_tnt", BANGLUM_TNT_BLOCK);
         RegistryHelper.block("banglum_nuke_core", BANGLUM_NUKE_CORE);
         RegistryHelper.block("carmot_nuke_core", CARMOT_NUKE_CORE);
