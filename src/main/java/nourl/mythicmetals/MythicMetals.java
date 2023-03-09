@@ -11,10 +11,8 @@ import io.wispforest.owo.itemgroup.gui.ItemGroupButton;
 import io.wispforest.owo.ops.LootOps;
 import io.wispforest.owo.registration.reflect.FieldRegistrationHandler;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.loot.LootTables;
 import net.minecraft.registry.RegistryKeys;
@@ -22,7 +20,6 @@ import net.minecraft.registry.tag.TagKey;
 import nourl.mythicmetals.abilities.Abilities;
 import nourl.mythicmetals.armor.CarmotShield;
 import nourl.mythicmetals.armor.MythicArmor;
-import nourl.mythicmetals.blocks.AquariumSentryBlockEntity;
 import nourl.mythicmetals.blocks.BanglumNukeHandler;
 import nourl.mythicmetals.blocks.MythicBlocks;
 import nourl.mythicmetals.config.MythicMetalsConfig;
@@ -63,7 +60,6 @@ public class MythicMetals implements ModInitializer, EntityComponentInitializer 
     public static final ComponentKey<CarmotShield> CARMOT_SHIELD = ComponentRegistry.getOrCreate(RegistryHelper.id("carmot_shield"), CarmotShield.class);
     public static final ComponentKey<CombustionCooldown> COMBUSTION_COOLDOWN = ComponentRegistry.getOrCreate(RegistryHelper.id("combustion_cooldown"), CombustionCooldown.class);
 
-    public static final BlockEntityType<AquariumSentryBlockEntity> AQUARIUM_SENTRY_BLOCK_ENTITY_TYPE = FabricBlockEntityTypeBuilder.create(AquariumSentryBlockEntity::new,  MythicBlocks.AQUARIUM_SENTRY).build();
     @Override
     public void onInitialize() {
         FieldRegistrationHandler.register(RegisterSounds.class, MOD_ID, false);
@@ -83,7 +79,7 @@ public class MythicMetals implements ModInitializer, EntityComponentInitializer 
         Abilities.init();
         RegisterEntityAttributes.init();
         RegisterPointOfInterests.init();
-        RegistryHelper.blockEntity("aquarium_sentry", AQUARIUM_SENTRY_BLOCK_ENTITY_TYPE);
+        RegisterBlockEntityTypes.init();
         MythicEntities.init();
         TABBED_GROUP.initialize();
         FuelRegistry.INSTANCE.add(MythicItems.Mats.MORKITE, 1200);
