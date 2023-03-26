@@ -5,7 +5,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.Monster;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundCategory;
@@ -115,7 +114,7 @@ public class AquariumStewardBlockEntity extends BlockEntity implements ConduitPo
                     1.0F,
                     1.0F
             );
-            blockEntity.targetEntity.damage(DamageSource.MAGIC, DAMAGE);
+            blockEntity.targetEntity.damage(blockEntity.targetEntity.world.getDamageSources().magic(), DAMAGE);
         }
 
         if (livingEntity != blockEntity.targetEntity) {
