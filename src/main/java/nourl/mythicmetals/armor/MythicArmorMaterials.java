@@ -20,6 +20,9 @@ public enum MythicArmorMaterials implements ArmorMaterial {
     AQUARIUM("aquarium", 20, new int[]{1, 4, 5, 2}, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, 0.0F, () -> {
         return Ingredient.ofItems(MythicItems.AQUARIUM.getIngot());
     }),
+    IMPROVED_AQUARIUM("improved_aquarium", 32, new int[]{3, 6, 7, 3}, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F, 0.0F, () -> {
+        return Ingredient.ofItems(MythicItems.AQUARIUM.getIngot());
+    }),
     BANGLUM("banglum", 14, new int[]{2, 5, 6, 3}, 1, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, 0.0F, () -> {
         return Ingredient.ofItems(MythicItems.BANGLUM.getIngot());
     }),
