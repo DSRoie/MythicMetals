@@ -37,7 +37,9 @@ public abstract class ArmorItemMixin {
     @Inject(method = "<init>", at = @At(value = "RETURN"))
     private void constructor(ArmorMaterial material, ArmorItem.Type type, Item.Settings settings, CallbackInfo ci) {
         UUID uUID = MODIFIERS.get(type);
-
+        if (material == MythicArmorMaterials.IMPROVED_AQUARIUM) {
+            mythicmetals$armorMapBuilder(uUID, AdditionalEntityAttributes.WATER_SPEED, "Swim Speed bonus", 0.05F, EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
+        }
         if (material == MythicArmorMaterials.CELESTIUM) {
             mythicmetals$armorMapBuilder(uUID, EntityAttributes.GENERIC_MOVEMENT_SPEED, "Speed bonus", 0.08F, EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
         }
