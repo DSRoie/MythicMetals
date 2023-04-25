@@ -102,7 +102,8 @@ public class MythicBlocks {
 
     public static final BlockSet MYTHRIL = BlockSet.Builder.begin("mythril", false)
             .createDefaultSet(5F, DIAMOND_MINING_LEVEL, DIAMOND_MINING_LEVEL)
-            .strength(5.5F).sounds(BlockSoundGroup.DEEPSLATE)
+            .strength(5.5F)
+            .sounds(BlockSoundGroup.DEEPSLATE)
             .createOreVariant("deepslate", DIAMOND_MINING_LEVEL)
             .finish();
 
@@ -121,8 +122,7 @@ public class MythicBlocks {
 
     public static final BlockSet PALLADIUM = BlockSet.Builder.begin("palladium", true)
             .strength(5.0F).sounds(BlockSoundGroup.NETHER_ORE)
-            .createOre(DIAMOND_MINING_LEVEL)
-            .strength(6.0F).sounds(BlockSoundGroup.METAL)
+            .createOre(DIAMOND_MINING_LEVEL).strength(6.0F).sounds(BlockSoundGroup.METAL)
             .createOreStorageBlock(DIAMOND_MINING_LEVEL)
             .createStorageBlock(Material.METAL, DIAMOND_MINING_LEVEL)
             .createAnvil(DIAMOND_MINING_LEVEL)
@@ -154,11 +154,10 @@ public class MythicBlocks {
             .createAnvilSet(5F, 5.5F, DIAMOND_MINING_LEVEL).finish();
 
     public static final BlockSet STARRITE = BlockSet.Builder.begin("starrite", false)
-            .strength(5.0F).createStarriteOre(DIAMOND_MINING_LEVEL, UniformIntProvider.create(3, 6))
-            .sounds(BlockSoundGroup.CALCITE)
-            .createStarriteOreVariant("calcite", DIAMOND_MINING_LEVEL, UniformIntProvider.create(3, 6))
-            .sounds(BlockSoundGroup.STONE).strength(5.0F)
-            .createStarriteOreVariant("end_stone", NETHERITE_MINING_LEVEL, UniformIntProvider.create(3, 6))
+            .strength(5.0F)
+            .createStarriteOre(DIAMOND_MINING_LEVEL, UniformIntProvider.create(3, 6))
+            .sounds(BlockSoundGroup.CALCITE).createStarriteOreVariant("calcite", DIAMOND_MINING_LEVEL, UniformIntProvider.create(3, 6))
+            .sounds(BlockSoundGroup.STONE).createStarriteOreVariant("end_stone", NETHERITE_MINING_LEVEL, UniformIntProvider.create(3, 6))
             .createAmethystStorageBlock(NETHERITE_MINING_LEVEL)
             .finish();
 
@@ -166,14 +165,10 @@ public class MythicBlocks {
             .createAnvilSet(5, IRON_MINING_LEVEL).finish();
 
     public static final BlockSet STORMYX = BlockSet.Builder.begin("stormyx", false)
-            .strength(5F).sounds(BlockSoundGroup.NETHER_ORE)
-            .createOre(IRON_MINING_LEVEL, UniformIntProvider.create(2, 4))
-            .sounds(BlockSoundGroup.GILDED_BLACKSTONE)
-            .createOreVariant("blackstone", IRON_MINING_LEVEL)
-            .strength(6.0F)
-            .createOreStorageBlock(IRON_MINING_LEVEL)
-            .sounds(BlockSoundGroup.METAL)
-            .createStorageBlock(Material.METAL, IRON_MINING_LEVEL)
+            .strength(5F).sounds(BlockSoundGroup.NETHER_ORE).createOre(IRON_MINING_LEVEL, UniformIntProvider.create(2, 4))
+            .sounds(BlockSoundGroup.GILDED_BLACKSTONE).createOreVariant("blackstone", IRON_MINING_LEVEL)
+            .strength(6.0F).createOreStorageBlock(IRON_MINING_LEVEL)
+            .sounds(BlockSoundGroup.METAL).createStorageBlock(Material.METAL, IRON_MINING_LEVEL)
             .createAnvil(IRON_MINING_LEVEL)
             .finish();
 
@@ -182,15 +177,12 @@ public class MythicBlocks {
 
 
     public static final BlockSet UNOBTAINIUM = BlockSet.Builder.begin("unobtainium", true)
-            .strength(16.0F, 13000F)
-            .sounds(BlockSoundGroup.LODESTONE)
+            .strength(16.0F, 13000F).sounds(BlockSoundGroup.LODESTONE)
             .createLuminantOre(NETHERITE_MINING_LEVEL, UniformIntProvider.create(4, 7), 1)
-            .strength(21F, 14000F)
-            .sounds(BlockSoundGroup.DEEPSLATE)
+            .strength(21F, 14000F).sounds(BlockSoundGroup.DEEPSLATE)
             .createOreVariant("deepslate", NETHERITE_MINING_LEVEL, UniformIntProvider.create(4, 7), 1)
-            .sounds(BlockSoundGroup.LODESTONE)
-            .strength(25F, 15000F)
-            .createStorageBlock(MYTHIC_MINING_LEVEL)
+            .sounds(BlockSoundGroup.LODESTONE).strength(25F, 15000F)
+            .createStorageBlock(NETHERITE_MINING_LEVEL)
             .finish();
 
 
