@@ -11,19 +11,18 @@ import net.minecraft.util.JsonHelper;
 import net.minecraft.world.World;
 import nourl.mythicmetals.registry.RegisterRecipeSerializers;
 
-public class MidasSmithingRecipe extends LegacySmithingRecipe implements SmithingRecipe {
+@Deprecated(forRemoval = true)
+public class LegacyMidasFoldingRecipe extends LegacySmithingRecipe implements SmithingRecipe {
     final Ingredient base;
     final Ingredient addition;
     final ItemStack result;
-    //final Ingredient template;
     final Identifier id;
 
-    public MidasSmithingRecipe(Ingredient base, Ingredient addition, ItemStack result, Identifier id) {
+    public LegacyMidasFoldingRecipe(Ingredient base, Ingredient addition, ItemStack result, Identifier id) {
         super(id, base, addition, result);
         this.base = base;
         this.addition = addition;
         this.result = result;
-        //this.template = template;
         this.id = id;
     }
 
@@ -41,7 +40,7 @@ public class MidasSmithingRecipe extends LegacySmithingRecipe implements Smithin
 
     @Override
     public ItemStack craft(Inventory inventory, DynamicRegistryManager registryManager) {
-        var itemStack = this.result.copy();
+        var itemStack = inventory.getStack(0).copy();
         if (itemStack.getItem().equals(MythicTools.MIDAS_GOLD_SWORD)) {
 
             int goldCount = itemStack.get(MidasGoldSword.GOLD_FOLDED);
@@ -79,12 +78,7 @@ public class MidasSmithingRecipe extends LegacySmithingRecipe implements Smithin
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return RegisterRecipeSerializers.MIDAS_SMITHING_RECIPE;
-    }
-
-    @Override
-    public boolean testTemplate(ItemStack stack) {
-        return false;
+        return RegisterRecipeSerializers.LEGACY_MIDAS_SMITHING_RECIPE;
     }
 
     @Override
@@ -97,25 +91,22 @@ public class MidasSmithingRecipe extends LegacySmithingRecipe implements Smithin
         return this.addition.test(stack);
     }
 
-    public static class Serializer implements RecipeSerializer<MidasSmithingRecipe> {
-            public MidasSmithingRecipe read(Identifier identifier, JsonObject jsonObject) {
-                //Ingredient ingredient = Ingredient.fromJson(JsonHelper.getObject(jsonObject, "template"));
+    public static class Serializer implements RecipeSerializer<LegacyMidasFoldingRecipe> {
+            public LegacyMidasFoldingRecipe read(Identifier identifier, JsonObject jsonObject) {
                 Ingredient ingredient2 = Ingredient.fromJson(JsonHelper.getObject(jsonObject, "base"));
                 Ingredient ingredient3 = Ingredient.fromJson(JsonHelper.getObject(jsonObject, "addition"));
                 ItemStack itemStack = ShapedRecipe.outputFromJson(JsonHelper.getObject(jsonObject, "result"));
-                //return new MidasSmithingRecipe(ingredient, ingredient2, ingredient3, itemStack, identifier);
-                return new MidasSmithingRecipe(ingredient2, ingredient3, itemStack, identifier);
+                return new LegacyMidasFoldingRecipe(ingredient2, ingredient3, itemStack, identifier);
             }
 
-            public MidasSmithingRecipe read(Identifier identifier, PacketByteBuf packetByteBuf) {
-                //Ingredient ingredient = Ingredient.fromPacket(packetByteBuf);
+            public LegacyMidasFoldingRecipe read(Identifier identifier, PacketByteBuf packetByteBuf) {
                 Ingredient ingredient2 = Ingredient.fromPacket(packetByteBuf);
                 Ingredient ingredient3 = Ingredient.fromPacket(packetByteBuf);
                 ItemStack itemStack = packetByteBuf.readItemStack();
-                return new MidasSmithingRecipe(ingredient2, ingredient3, itemStack, identifier);
+                return new LegacyMidasFoldingRecipe(ingredient2, ingredient3, itemStack, identifier);
             }
 
-            public void write(PacketByteBuf packetByteBuf, MidasSmithingRecipe smithingRecipe) {
+            public void write(PacketByteBuf packetByteBuf, LegacyMidasFoldingRecipe smithingRecipe) {
                 smithingRecipe.base.write(packetByteBuf);
                 smithingRecipe.addition.write(packetByteBuf);
                 packetByteBuf.writeItemStack(smithingRecipe.result);
